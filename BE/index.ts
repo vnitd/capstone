@@ -1,9 +1,9 @@
 import express, { Express, json, NextFunction, Request, Response, urlencoded } from "express";
 import dotenv from "dotenv";
-import normalizePort from "./utils/normalizePort.ts";
+import normalizePort from "./utils/normalizePort";
 import logger from "morgan";
 import { createServer } from "http";
-import { onError, onListening } from "./utils/appEvents.ts";
+import { onError, onListening } from "./utils/appEvents";
 import { connect } from "mongoose";
 import cors from "cors";
 

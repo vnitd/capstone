@@ -1,13 +1,16 @@
 import express, { Express, json, NextFunction, Request, Response, urlencoded } from "express";
 import dotenv from "dotenv";
-import normalizePort from "./utils/normalizePort.js";
 import logger from "morgan";
 import { createServer } from "http";
-import { onError, onListening } from "./utils/appEvents.js";
 import { connect } from "mongoose";
 import cors from "cors";
 
+import normalizePort from "./utils/normalizePort.js";
+import { onError, onListening } from "./utils/appEvents.js";
+import userRoute from "./routes/users.route.js";
+
 dotenv.config();
+
 const app: Express = express();
 
 /**
@@ -17,7 +20,9 @@ connect(process.env.MONGODB_URL as string)
 	.then(() => {
 		console.log("🚀 Connected to the server successful!");
 	})
-	.catch((reason: any) => console.log(reason));
+	.catch((reason) => console.log(reason));
+
+// Khởi tạo Firebase
 
 /**
  * Get port from .env and store in Express.
@@ -35,19 +40,9 @@ console.log(process.env.FE_URL);
 app.use(
 	cors({
 		origin: "*",
-		optionsSuccessStatus: 200,
+		methods: "*",
 	})
 );
-app.options("*", cors());
-app.use((req, res, next) => {
-	if (req.method === "OPTIONS") {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS");
-		res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-		return res.sendStatus(200);
-	}
-	next();
-});
 
 /**
  * Routes setup.
@@ -57,6 +52,7 @@ console.log(apiPrefix);
 app.get("/", (_req, res) => {
 	res.json({ message: "Hello world!" });
 });
+app.use(`${apiPrefix}/users`, userRoute);
 
 /**
  * Handle errors.

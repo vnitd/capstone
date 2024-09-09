@@ -50,6 +50,7 @@ function SignUp() {
       });
       push("/sign-in");
     } catch (err: any) {
+      console.log(err);
       toast.error(language[err?.data?.result as string] || err?.data?.result);
     }
   };

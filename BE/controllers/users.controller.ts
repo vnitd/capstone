@@ -4,8 +4,7 @@ import { Account } from "../models/account.model.js";
 
 async function register(req: Request, res: Response, next: NextFunction) {
 	try {
-		console.log(req);
-		const message = await addAccount(req.body as Account);
+		const message = await addAccount(req.body?.data as Account);
 		res.status((message?.status as number) || 200).json({
 			...message,
 		});

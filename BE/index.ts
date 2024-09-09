@@ -43,6 +43,13 @@ app.use(
 		methods: "*",
 	})
 );
+app.options(
+	"*",
+	cors({
+		origin: "*",
+		methods: "*",
+	})
+);
 
 /**
  * Routes setup.

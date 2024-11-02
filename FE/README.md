@@ -1,53 +1,71 @@
-# Next.js & NextUI Template
+# NextJS and NextUI Dashboard Template Starter
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+You can deploy here directly to vercel [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/Siumauricio/nextui-dashboard-template)
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
 
-## Technologies Used
+V1 Version Stitches https://v1-nextui-dashboard-template.vercel.app/
+V1 Code: https://github.com/Siumauricio/nextui-dashboard-template/tree/v1
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+This is a template for NextJS and NextUI.
 
-## How to Use
+[NextJS](https://nextjs.org/)
+[NextUI](https://nextui.org/)
 
-### Use the template with create-next-app
+You can see the demo here: https://nextui-dashboard-template.vercel.app/
+For improve this template, you can create a pull request or open an issue here [Issues](https://github.com/Siumauricio/nextui-dashboard-template/issues) or [Pull Request](
+    https://github.com/Siumauricio/nextui-dashboard-template/pulls)
 
-To create a new project based on this template using `create-next-app`, run the following command:
+### Dark Mode
+![Dashboard Dark Mode](./public/dark.png)
 
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
+### Light Mode
+![Dashboard Light Mode](./public/light.png)
+
+
+- Dark Mode Support
+- Full Responsive
+- Home Page with Charts
+- Accounts Page
+- More pages coming soon...
+
+```
+├── components
+│   ├── accounts            # Accounts components
+│   ├── charts              # Charts components
+│   ├── breadcrumb          # component
+|   ├── home                # Home components
+|   ├── layout              # Layout components
+|   ├── navbar              # Navbar components
+|   ├── sidebar             # Sidebar components
+|   ├── table               # Table components
+|   ├── styles              # Some reusable components
+|   ├── icons               # Icons
+|   ├── hooks               # Hooks
+├── app                     # Documentation files
+│   ├── accounts            # Accounts route
+|       ├── page.tsx        # Accounts page
+│   ├── page.tsx            # Entry point for the app
+│   ├── layout.tsx          # Layout applied to all application pages
+│   ├── providers.tsx       # Theme provider
+│   ├── more...             # Soon
+└──
 ```
 
-### Install dependencies
+## For Run
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+Install dependencies
+
 
 ```bash
 npm install
 ```
 
-### Run the development server
+Start the server
+
+
 
 ```bash
 npm run dev
 ```
 
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+Now you can visit https://localhost:3000 in your browser.

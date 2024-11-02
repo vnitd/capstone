@@ -4,7 +4,8 @@ import { Account } from "../models/account.model.js";
 
 async function register(req: Request, res: Response, next: NextFunction) {
 	try {
-		const message = await addAccount(req.body?.data as Account);
+		const lang = (req as any).langPack;
+		const message = await addAccount(req.body?.data as Account, lang);
 		res.status((message?.status as number) || 200).json({
 			...message,
 		});
@@ -15,7 +16,8 @@ async function register(req: Request, res: Response, next: NextFunction) {
 
 async function login(req: Request, res: Response, next: NextFunction) {
 	try {
-		const message = await compareAccount(req.query);
+		const lang = (req as any).langPack;
+		const message = await compareAccount(req.query, lang);
 		res.status((message?.status as number) || 200).json(message);
 	} catch (err) {
 		next(err);

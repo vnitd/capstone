@@ -2,19 +2,19 @@
 
 import { baseApi } from "../base";
 
-import { endpoints } from "@/config/endpoints";
+import { endpoints } from "@/config";
 
 export const geminiAPI = baseApi.injectEndpoints({
-  endpoints: (build) => ({
-    postGemini: build.mutation({
-      query: (data: any) => ({
-        url: endpoints.endpointGemini.POST,
-        method: "POST",
-        body: { data },
-        flashError: true,
-      }),
-    }),
-  }),
+	endpoints: (build) => ({
+		postGemini: build.mutation({
+			query: (data: any) => ({
+				url: endpoints.endpointGemini.POST,
+				method: "POST",
+				body: { data },
+				flashError: true,
+			}),
+		}),
+	}),
 });
 
 export const { usePostGeminiMutation } = geminiAPI;

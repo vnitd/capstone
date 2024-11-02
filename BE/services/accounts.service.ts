@@ -4,10 +4,10 @@ import accountsSchema from "../schemas/accounts.schema.js";
 
 const saltRounds = 10;
 
-async function addAccount(data: Account) {
+async function addAccount(data: Account, lang: any) {
 	try {
 		// check password
-		if ((data.password?.length || 0) < 8) return { status: 400, result: "ACCOUNT_PASS_SHORT" };
+		if ((data.password?.length || 0) < 8) return { status: 400, result: lang["ACCOUNT_PASS_SHORT"] };
 
 		// hash password
 		const salt = await genSalt(saltRounds);
@@ -18,12 +18,12 @@ async function addAccount(data: Account) {
 
 		return {
 			status: 200,
-			result: res,
+			result: { _id: res._id },
 		};
 	} catch (err: any) {
 		if (err?.code === 11000) {
-			if (err?.keyPattern?.sid) return { status: 400, result: "ACCOUNT_ID_UNIQUE" };
-			if (err?.keyPattern?.email) return { status: 400, result: "ACCOUNT_EMAIL_UNIQUE" };
+			if (err?.keyPattern?.sid) return { status: 400, result: lang["ACCOUNT_USERNAME_UNIQUE"] };
+			if (err?.keyPattern?.email) return { status: 400, result: lang["ACCOUNT_EMAIL_UNIQUE"] };
 		}
 		if (err?.errors?.sid) return { status: 400, result: err?.errors?.sid.message };
 		if (err?.errors?.email) return { status: 400, result: err?.errors?.email.message };
@@ -31,9 +31,8 @@ async function addAccount(data: Account) {
 	}
 }
 
-async function compareAccount(data: any): Promise<any> {
+async function compareAccount(data: any, lang: any): Promise<any> {
 	try {
-		// create mongo record
 		const res = await accountsSchema.findOne<any>({
 			$or: [{ email: data?.acc }, { sid: data?.acc }],
 		});
@@ -51,7 +50,7 @@ async function compareAccount(data: any): Promise<any> {
 			};
 		return {
 			status: 401,
-			result: "UNAUTHORIZED",
+			result: "HTTP_UNAUTHORIZED",
 		};
 	} catch (err: any) {
 		throw err;
